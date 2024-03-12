@@ -1,9 +1,12 @@
+import { Route, Routes } from 'react-router-dom';
 import { FormLogin } from '../components/FormLogin';
+import { FormRegister } from '../components/FormRegister';
 import { Header } from '../components/Header';
 
 export const MainLogin = () => {
   return (
     <>
+
       <div className="relative">
         <div className="flex justify-center items-center h-screen">
           <div className="mt-0 ml-0 absolute left-0 top-0">
@@ -13,7 +16,10 @@ export const MainLogin = () => {
           <div className="absolute inset-0 bg-imagen-bg bg-center filter grayscale opacity-5" />
           
           <div className='w-1/3 h-1/4 z-10'>
-            <FormLogin />
+    <Routes>
+          <Route path='/login' element={<FormLogin/>}/>
+          <Route path='/register' element={<FormRegister/>}/> 
+    </Routes>
           </div>
         </div>
       </div>
@@ -21,3 +27,4 @@ export const MainLogin = () => {
   );
   
 };
+

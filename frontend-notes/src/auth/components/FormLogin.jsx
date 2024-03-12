@@ -2,15 +2,22 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setStatus, setToken } from '../../store/tokenSlice';
+
 
 export const FormLogin = () => {
 
-    const {login} = useContext( AuthContext )
+    
+    const dispatch = useDispatch();
+
+    // const status = useSelector((state) => state.reducer.statusValue);
+    // const token = useSelector((state) => state.reducer.token);
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     
-    const [form, setform] = useState('')
 
     const handleInput = (evento) =>{
         evento.preventDefault();
@@ -24,10 +31,16 @@ export const FormLogin = () => {
 
     const handleForm = async(e) =>{
         e.preventDefault();
-        const credenciales = await axios.post('/hola',{
+        const response = await axios.post(`http://localhost:8080/login`,{
             "username": `${username}`, 
             "password": `${password}`, 
         })
+        dispatch(setStatus(response.status));
+        dispatch(setToken(response.data.token));
+
+        console.log(response.data.token);
+        console.log(response.status);
+
     }
 
 
@@ -68,6 +81,10 @@ export const FormLogin = () => {
                     className="rounded-lg bg-color-button  w-3/4 mt-1 text-white">
                         Continue
                     </button>
+                    <Link 
+                        to="/register">
+                        Register you
+                    </Link>
                 </form>
             </div>
         </section>

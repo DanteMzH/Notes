@@ -6,10 +6,14 @@ import { MainLogin } from "./auth/page/MainLogin.jsx"
 import { BrowserRouter } from 'react-router-dom'
 import { RouterApp } from './Router/RouterApp.jsx'
 import { AuthProvider } from './auth/context/AuthProvider.jsx'
-
+import store from './store/store.js'
+import { Provider } from 'react-redux'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+
+<Provider store ={store}>
+
 <AuthProvider>
 
     <BrowserRouter>
@@ -20,4 +24,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
 </AuthProvider>
 
+</Provider>
 )
